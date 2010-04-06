@@ -18,6 +18,5 @@ JSSettings::instance()
 	))
 	->properties('request', array
 	(
-		// default to http
-		'protocol'   => 'http',
+		'protocol'   => Request::$protocol,
 	));
