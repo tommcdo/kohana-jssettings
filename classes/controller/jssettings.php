@@ -2,6 +2,9 @@
 
 class Controller_JSSettings extends Controller {
 
+	/**
+	 * Media action for the JSSettings js file
+	 */
 	public function action_script()
 	{
 		header('Content-type: application/x-javascript');

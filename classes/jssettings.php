@@ -1,11 +1,40 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * JSSettings Library
+ *
+ * @package    JSSettings
+ * @author     Lorenzo Pisani
+ * @copyright  (c) 2009-2010 Synapse Studios
+ */
 class JSSettings {
 
+	/**
+	 * Routes to export for reverse routing in JS
+	 *
+	 * @var array $_routes
+	 */
 	protected $_routes = array();
+
+	/**
+	 * config items to export
+	 *
+	 * @var array $_config
+	 */
 	protected $_config = array();
+
+	/**
+	 * class properties to export
+	 *
+	 * @var array $_properties
+	 */
 	protected $_properties = array();
 
+	/**
+	 * Returns the JSSettings instance
+	 *
+	 * @return self
+	 */
 	public static function instance()
 	{
 		static $instance;
@@ -15,8 +44,18 @@ class JSSettings {
 		return $instance;
 	}
 
+	/**
+	 * This class is a singleton!
+	 */
 	final private function __construct() {}
 
+	/**
+	 * Exports an array of class properties to JSSettings.
+	 * 
+	 * @param string $class      - the class the properties belong to
+	 * @param array  $properties - key => value pairs to export
+	 * @return self
+	 */
 	public function properties($class, array $properties)
 	{
 		if ( ! isset($this->_properties[$class]))
@@ -27,6 +66,13 @@ class JSSettings {
 		return $this;
 	}
 
+	/**
+	 * Exports an array of config items to JSSettings.
+	 * 
+	 * @param string $group   - the group the configs belong to
+	 * @param array  $configs - key => value pairs to export
+	 * @return self
+	 */
 	public function configs($group, array $configs)
 	{
 		if ( ! isset($this->_configs[$group]))
@@ -37,6 +83,11 @@ class JSSettings {
 		return $this;
 	}
 
+	/**
+	 * Loops through the routes and stored them in _routes
+	 *
+	 * @return self
+	 */
 	protected function read_routes()
 	{
 		foreach (Route::all() as $name => $route)
@@ -51,6 +102,11 @@ class JSSettings {
 		return $this;
 	}
 
+	/**
+	 * Returns the view of the JS file to include. Writes the cache if needed.
+	 *
+	 * @return object
+	 */
 	public function script_content()
 	{
 		$config = Kohana::config('jssettings');
@@ -72,6 +128,12 @@ class JSSettings {
 		return $view;
 	}
 
+	/**
+	 * Returns the output of HTML::script() for either the url that generates
+	 * the JS file or for the cached copy
+	 *
+	 * @return string
+	 */
 	public function script()
 	{
 		$config = Kohana::config('jssettings');

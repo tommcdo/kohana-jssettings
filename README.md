@@ -13,3 +13,8 @@ routing in their javascript files.  I suppose that's only useful when you want
 to make an ajax call that does not degrade. The module also provides an easy 
 interface to pass config items and class properties into js files. Careful not 
 to send sensitive information like passwords!
+
+## Installation
+
+- Configure the caching options in config/jssettings.php
+- Make sure your webserver can write to the directory you chose for cache_file
